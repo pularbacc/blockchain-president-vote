@@ -1,0 +1,61 @@
+===============================================================================
+=[hyperledger]=
+===============================================================================
+
+__________________________________________________________
+
+# blockchain
+- là một sổ cái giao dịch bất biến
+- được duy trì trong một mạng lưới phân tán của các nút ngang hàng
+    + Mỗi nút này duy trì một bản sao của sổ cái 
+    + bằng cách áp dụng các giao dịch đã được xác thực bởi sự đồng thuận giao thức
+
+# Hyperledger Fabric
+- là framework của blockchain 
+
+# Distributed Ledger | sỗ cái phân tán 
+- ghi lại tất cả các giao dịch diễn ra trên mạng
+
+# Smart Contracts | hợp đồng thông minh | Chaincode 
+- xác định khả năng thực thi logic tạo ra các sự kiện mới được thêm vào sổ cái
+- Trước khi các tổ chức có thể giao dịch với nhau, họ phải xác định một tập hợp chung các hợp đồng
+    + các điều khoản chung
+    + dữ liệu
+    + quy tắc
+    + định nghĩa khái niệm 
+    + quy trình
+- các ứng dụng muốn được sửa đổi sỗ cái phải thông qua hoạt đồng thông minh 
+
+# peers | đồng đẵng 
+- là thành phần cơ bản của bất kỳ mạng Fabric nào
+- lưu trữ sổ cái chuỗi khối và xác thực các giao dịch trước khi chúng được cam kết vào sổ cái
+- Mỗi đồng đẳng trong mạng cần phải thuộc về một tổ chức
+
+# organization
+- mỗi tổ chức vận hành một peer
+
+# ordering service
+- cấp quyền giao dịch
+- thực thi kiểm soát truy cập cho các kênh
+- thực hiện giao dịch này đặt hàng
+
+# channel 
+- là một lớp giao tiếp riêng tư giữa các thành viên mạng cụ thể. 
+- Các kênh chỉ có thể được sử dụng bởi các tổ chức được mời tham gia kênh
+
+
+_________________
+
+$ ./network.sh up 
+    - 2 tổ chức ngang hàng : org1 và org2
+    - 1 tổ chức đặt hàng  : orderer 
+
+$ ./network.sh createChannel -c mychannel -ca
+    - tạo kênh với tên là mychannel 
+    - hiển thị mạng thử nghiệm bằng cơ quan cấp chứng chỉ
+
+$ ./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-typescript -ccl typescript
+    - tạo kênh và bắt đầu chaincode trên kênh 
+
+$ ./network.sh down
+    - Dừng mạng 
